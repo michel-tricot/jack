@@ -1,11 +1,11 @@
 # Copyright 2011 Rapleaf
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #    http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -27,16 +27,14 @@ class SchemaRbParser
       elsif line =~ /create_table/ && line !~ /schema_info/
         model_defn = ModelDefn.new(line, migration_number)
 
-        ordinal = 0
         line = file_lines.shift
         while line =~ /^\s*t\.[a-z]+ / && !file_lines.empty?
           matches = line.match(/^\s*t\.([a-z]+)\s*"([^"]+)",?(.*)$/)
           raise "problem with #{model_defn.table_name}" if !matches
-          field_defn = FieldDefn.new(matches[2], matches[1].to_sym, ordinal, Hash[matches[3].split(',').map{|a| a.split("=>").map{|s| s.strip}}])
+          field_defn = FieldDefn.new(matches[2], matches[1].to_sym, Hash[matches[3].split(',').map{|a| a.split("=>").map{|s| s.strip}}])
           model_defn.fields << field_defn
 
           line = file_lines.shift
-          ordinal += 1
         end
         models << model_defn
       end

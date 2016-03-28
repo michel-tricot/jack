@@ -1,11 +1,11 @@
 # Copyright 2011 Rapleaf
-# 
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #    http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -13,13 +13,12 @@
 # limitations under the License.
 
 class ProjectDefn
-  attr_reader :databases_namespace, :databases
+  attr_reader :databases_namespace, :databases, :disable_legacy_id, :generate_id
 
   def initialize(map)
-    @databases_namespace = map["databases_namespace"]
-    @databases = []
-    map["databases"].each do |database|
-      @databases << DatabaseDefn.new(database)
-    end
+    @databases_namespace = map['databases_namespace']
+    @databases = map['databases'].map {|database| DatabaseDefn.new(database)}
+    @generate_id = map['generate_id']
+    @disable_legacy_id = !!map['disable_legacy_id'] || @generate_id
   end
 end
