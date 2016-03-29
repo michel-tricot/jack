@@ -13,12 +13,10 @@
 # limitations under the License.
 
 class ProjectDefn
-  attr_reader :databases_namespace, :databases, :disable_legacy_id, :generate_id
+  attr_reader :databases_namespace, :databases
 
   def initialize(map)
     @databases_namespace = map['databases_namespace']
     @databases = map['databases'].map {|database| DatabaseDefn.new(database)}
-    @generate_id = map['generate_id']
-    @disable_legacy_id = !!map['disable_legacy_id'] || @generate_id
   end
 end
