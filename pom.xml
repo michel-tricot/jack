@@ -94,6 +94,12 @@
       <version>2.7</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.spullara.mustache.java</groupId>
+      <artifactId>compiler</artifactId>
+      <version>0.8.18</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -112,6 +118,7 @@
           <include>**/*.txt</include>
           <include>**/*.rb</include>
           <include>**/*.erb</include>
+          <include>**/*.mustache</include>
           <include>**/Gemfile</include>
           <include>**/Gemfile.lock</include>
         </includes>
