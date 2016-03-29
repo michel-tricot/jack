@@ -31,9 +31,6 @@ class Jack
 
       model_defns, migration_number = SchemaRbParser.parse(base_dir + "/" + database_defn.schema_rb)
       model_defns.each do |model_defn|
-        if project_defn.generate_id
-          #model_defn.fields << FieldDefn.new(project_defn.generate_id, :bigint, model_defn.fields.size, {':null' => 'false'})
-        end
         model_defn.database_defn = database_defn
         model_defn.namespace = database_defn.namespace
         by_table_name[model_defn.table_name] = model_defn
